@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{  url_for('static', filename='js/wall.js') }}"></script>
+    <title>Python Exam</title>
+</head>
+
+<body>
+    <!-----------Registration------------------------------------------>
+    <div class="container">
+        <h1 class="mx-auto" style="width: 900px;">Welcome! Sign In To Manage Your Jobs!</h1>
+        <div class="row">
+            <div class="col-6">
+                <form action="/registration" , method="POST" id="regForm">
+                    <h1>Register Here</h1>
+                    <div class="form-group">
+                        <!-------------------Input First Name---------------------------------------------------->
+                        <label for="first_name" name="fname">First Name</label>
+                        <input type="text" class="form-control" id="first_name" aria-describedby="fnamehelp"
+                            placeholder="Enter Your First Name" name="fname">
+                        {% with fname = get_flashed_messages(category_filter=["fnametoolittle"]) %}
+                        {% if fname %}
+                        {% for message in fname %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <!-------------------Input Last Name---------------------------------------------------->
+                    <label for="last_name" name="lname">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" aria-describedby="lnameHelp"
+                        placeholder="Enter Your Last Name" name="lname">
+                    {% with lname = get_flashed_messages(category_filter=["lnametoolittle"]) %}
+                    {% if lname %}
+                    {% for message in lname%}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <!-------------------Input Email---------------------------------------------------->
+                    <div id="emailnameMsg"></div>
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp"
+                        placeholder="Enter email" name="email">
+                    {% with email = get_flashed_messages(category_filter=["emailtoolittle"]) %}
+                    {% if email %}
+                    {% for message in email%}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                    <!-------------------Input Password---------------------------------------------------->
+                    <label for="pass">Password</label>
+                    <input type="password" class="form-control" id="input_password" placeholder="Password" name="pass">
+                    {% with pass = get_flashed_messages(category_filter=["pickpassword"]) %}
+                    {% if pass %}
+                    {% for message in pass %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <!-------------------Confirm Password---------------------------------------------------->
+                    <label for="cpass">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password"
+                        name="cpass">
+                    {% with cpass = get_flashed_messages(category_filter=["confpw"]) %}
+                    {% if cpass %}
+                    {% for message in cpass %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <!-- ------------------------------------------------------------------ -->
+            </div>
+            <div id=seperate></div>
+            <div class="row">
+                <!-- Logging In----------------------------------------------------------------------- -->
+                <form action="/processlogin" , method="POST">
+                    <h1>Login Here</h1>
+                    {% with email = get_flashed_messages(category_filter=["loginhere"]) %}
+                    {% if email %}
+                    {% for message in email%}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                    <!-------------------Email---------------------------------------------------->
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp"
+                            placeholder="Enter email" name="email">
+                        {% with email = get_flashed_messages(category_filter=["emailwrong"]) %}
+                        {% if email %}
+                        {% for message in email%}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                        <!-------------------Password---------------------------------------------------->
+                        <label for="pass">Password</label>
+                        <input type="password" class="form-control" id="input_password" placeholder="Password"
+                            name="pass">
+                        {% with pass = get_flashed_messages(category_filter=["passwordwrong"]) %}
+                        {% if pass %}
+                        {% for message in pass %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <!-- --------------------------------------------------------------------------------- -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

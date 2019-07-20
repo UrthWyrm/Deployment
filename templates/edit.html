@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <script src="{{  url_for('static', filename='js/wall.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Edit Jobs</title>
+</head>
+
+<body>
+    <!-----------Editing A Job------------------------------------------>
+    
+    <div class="container">
+        <h3> Hello {{ user_info[0]["first_name"] }}! Let's edit your job!</h3>
+            <p class="go_back"><a href="/dashboard/{{session['id']}}">Go Back</a></p>
+        <div class="row">
+            <div class="col-6">
+                <form action="/edit_jobsprocess" method="POST" id="regForm" >
+                    <input type="hidden" name="job_id" value="{{ job['id'] }}">
+                    <h1>Update</h1>
+                    <div class="form-group">
+                        <label for="title" name="title">Title</label>
+                        <input type="text" class="form-control" id="title" aria-describedby="titlehelp"
+                            value ="{{job['title']}}" name="tname">
+                        {% with fname = get_flashed_messages(category_filter=["titlehere"]) %}
+                        {% if title %}
+                        {% for message in title %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <label for="description" name="desc">Description</label>
+                    <textarea class="form-control" id="description" aria-describedby="descHelp"
+                        value="{{job['description']}}" name="desc">{{job['description']}}</textarea>
+                    {% with lname = get_flashed_messages(category_filter=["networkhere"]) %}
+                    {% if n_name %}
+                    {% for message in n_name%}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <label for="Location">Location</label>
+                    <input type="location" class="form-control" id="Location" aria-describedby="dateHelp"
+                     name="add_loc" value="{{job['location']}}">
+                    {% with email = get_flashed_messages(category_filter=["date_here"]) %}
+                    {% if email %}
+                    {% for message in email%}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="/dashboard/{{session['id']}}" class="btn btn-primary" role="button" aria-pressed="true">Cancel</a>
+                </form>
+                <!-- ------------------------------------------------------------------ -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

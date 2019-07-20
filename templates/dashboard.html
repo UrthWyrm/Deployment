@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <h1 class="form-control" name="welcome">Hello, {{ user_info[0]["first_name"] }}</h1>
+    <a href="/endsession/{{session['id']}}">Logout</a>
+    <a href="/new_job/{{session['id']}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Job</a>
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive{-xl}">
+                    <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Title</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                              </tr></thead>
+                            <tbody>
+                            {% for job in jobs %}
+                              <tr>
+                                {% if job.user_id|int != session['id']|int %}
+                                <td>{{ job.title }}</td>
+                                <td>{{ job.location }}</td>
+                                
+                                <td class="row"><h6><a href="/jobs/{{job.id }}">View </a></h6> |
+                                    <h6><a href="/edit_jobs/{{job.id }}">Edit </a></h6> |
+                                    <h6><a href="/addtomyjobs/{{job.id }}">Add </h6> |
+                                    <h6><a href="/delete/{{job.id }}">Delete</a></h6></td>
+                              </tr>
+                              {% endif %}
+
+                              {% endfor %}
+                            </tbody>
+                          </table>
+
+                          <div class="table-responsive{-xl}">
+                                <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th>Title</th>
+                                            <th>Location</th>
+                                            <th>Actions</th>
+                                          </tr></thead>
+                                        <tbody>
+                                        {% for myjob in myjobs %}
+                                          <tr>
+                                            <td>{{ myjob.title}}</td>
+                                            <td>{{ myjob.location}}</td>
+                                            <td class="row"><h6><a href="/jobs/{{myjob.job_id }}">View </a></h6> |
+                                                <h6><a href="/deletefromlist/{{myjob.job_id }}">Give Up </a></h6> |
+                                                <h6><a href="/endsession/{{session['id']}}">Done</h6>
+                                                {% endfor %}
+                                            </tr>
+                                        </tbody>
+                                      </table>
+            </div>
+
+            </div>
+        </div>
+
+</body>
+
+</html>

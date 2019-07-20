@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <title>Add a Job</title>
+</head>
+
+<body>
+    <h1 class="form-control" name="welcome">Welcome, you've been logged in, {{ user_info[0]["first_name"] }} </h1>
+    <a class="form-control" href="/endsession/{{session['id']}}">Logout</a>
+    <a class="form-control" href="/dashboard/{{session['id']}}">Dashboard</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h3>Hello {{user_info[0]['first_name']}} Create a Job!</h3>
+                </h1>
+                <form action="/add_job" method="POST" id="regForm">
+                    <div class="form-group">
+                        <label for="title">Job Title</label>
+                        <input type="text" class="form-control" id="Title" aria-describedby="titlehelp"
+                            placeholder="Enter a Job" name="tname">
+                        {% with tname = get_flashed_messages(category_filter=["titletoolittle"]) %}
+                        {% if tname %}
+                        {% for message in tname %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <label for="descrip" name="desc">Job Description</label>
+                    <textarea class="form-control" id="description" aria-describedby="dHelp"
+                        placeholder="What's It About?" name="desc"></textarea>
+                    {% with desc = get_flashed_messages(category_filter=["desctoolittle"]) %}
+                    {% if desc %}
+                    {% for message in desc %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <label for="loc" name="location">Job Location</label>
+                    <input type="text" class="form-control" id="Location" aria-describedby="locHelp"
+                        placeholder="Enter The Job Location" name="location"></input>
+                    {% with location = get_flashed_messages(category_filter=["loctoolittle"]) %}
+                    {% if location %}
+                    {% for message in location %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <font color="magenta">
+                        <label for="category">Category</label>
+                        <div class="col-6"></div>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only"></label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="category" value= "Technology"/> Technology
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="category" value="Medical" /> Medical
+                                </label>
+                            </div>
+                            <div class="checkbox" name="category">
+                                <label>
+                                    <input type="checkbox" name="category" value="Law" /> Law
+                                </label>
+                            </div>
+                            <label for="other">Other</label>
+                            <input type="text" class="form-control" id="Other" aria-describedby="titlehelp"
+                                name="category">
+                    </font>
+                
+                <button id="job_button">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div id="seperator"></div>
+    </div>
+
+</body>
+
+</html>

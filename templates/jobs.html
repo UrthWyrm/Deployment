@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <title>View Job</title>
+</head>
+
+<body>
+    <h1 class="form-control" name="welcome">Welcome, you've been logged in, {{ user_info[0]["first_name"] }} </h1>
+    <a class="form-control" href="/endsession/{{session['id']}}">Logout</a>
+    <a class="form-control" href="/dashboard/{{session['id']}}">Dashboard</a>
+    <div class="container">
+            <div id="job_info">
+                    <h3>{{ job[0]["title"] }}</h3>
+            <div class="panel panel-default">
+                    <div class="panel-body">{{ job[0]["description"] }}</div>
+                    <div class="panel-body">{{ job[0]["location"] }}</div>
+                    <div class="panel-body">
+                        
+                            Added by: {{ added[0]["first_name"] }}
+                        </div>
+                    <div class="panel-body">Posted on: {{ job[0]["created_at"] }}</div>
+                    <div id="spacer"></div>
+                    <div class="panel-body"><font color="magenta">Categories: {{ job[0]["category"] }}</font></div>
+
+                  </div>
+                  </div>
+        <h3><a href="/addtomyjobs/{{job[0].id}}">Add To List</a></h3>
+        <div id="job_box">
+        </div>
+        
+    </div>
+</body>
+</html>
